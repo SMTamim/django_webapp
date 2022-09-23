@@ -1,0 +1,41 @@
+{% load static %}
+{% include "header.html" %} 
+
+        <section>
+            <div class="w-100 position-relative">
+                <div class="feat-wrap3 position-relative overflow-hidden w-100">
+                    <div class="feat-img-caro w-100">
+                        <div class="d-block w-100">
+                            <img src="{% static 'images/banner-01.jpg' %}" class="img-responsive" style='width: 100%; height:auto;'>    
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="w-100 pt-50 pb-40 gray-layer opc5 position-relative">
+                <div class="fixed-bg" style="background-image: url('{% static 'images/pattern-bg2.jpg' %}');"></div>
+                <div class="container">
+                    <div class="sec-title text-center w-100">
+                        <div class="sec-title-inner d-inline-block">
+                            <h2 class="mb-0">Introduction</h2>
+                            <p class="mb-0">
+                                Predicting the outcome of a Chronic Subdural Hematoma (CSDH) referral using a deep learning algorithm, 
+                                to determine the admission/acceptance or rejection of a CSDH patient for neurosurgical intervention. We 
+                                have created a multi-level perceptron artificial neural network that takes in 7 input variables to predict 
+                                whether a patient’s referral would be accepted by neurosurgery. The model, named Artificial Neural network 
+                                for Chronic subdural HematOma Referral outcome prediction (ANCHOR), was trained on 1050 patients and tested on 
+                                an unseen cohort of 450 patients, yielding accuracy of 96.2%, sensitivity of 92.2%, specificity of 98.1%, positive 
+                                predictive value of 95.6% and an AUC of 0.951. The model is continuously being trained and improved behind the scenes 
+                                and thus any and all feedback from physicians is appreciated. All the source code is available upon request.
+                            <p class="mb-0">
+                                Disclaimer: The model is not externally validated and thus not recommended for clinical use.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+{% include "footer.html" %} 

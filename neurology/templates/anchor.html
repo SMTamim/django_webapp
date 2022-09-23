@@ -1,0 +1,224 @@
+{% load static %}
+{% include "header.html" %} 
+
+    <section>
+        <div class="w-100 pt-100 black-layer opc5 pb-80 position-relative breadcrumb-anchor">
+            <div class="fixed-bg"></div>
+            <div class="container">
+                <div class="page-title-wrap text-center w-100">
+                    <div class="page-title-inner d-inline-block">
+                        <h1 class="mb-0">ANCHOR</h1>
+                        <ol class="breadcrumb mb-0 justify-content-center">
+                            <li class="breadcrumb-item"><a href="/" title="">Home</a></li>
+                            <li class="breadcrumb-item active">ANCHOR</li>
+                        </ol>
+                    </div>
+                </div><!-- Page Title Wrap -->
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="w-100 pt-100 gray-layer opc7 pb-100 position-relative">
+            <div class="fixed-bg achor-bg2"></div>
+            <div class="container">
+                <div class="sec-title4 text-center w-100">
+                    <div class="sec-title4-inner d-inline-block">
+                        <h2 class="mb-0">ANCHOR Analysis</h2>
+                    </div>
+                </div>
+                <!--<div class="model-alert">
+                    <span id="prediction">Prediction: </span><span id="decision">Decision: </span>
+                </div>-->
+                <!--predict-aan-case-->
+               
+                {% if request.GET.result != 'true' %}
+                <form id="analysis-form" class="predict-aan-case" action="/neural-analysis-model/?result=true" method="post">
+                    {% csrf_token %}
+                    <div class="row analysis-form align-items-center">
+                        <div class="col-md-6">
+                            <label> <a href="javascript:helpMessage('Increasing age has been shown to be a negative predictor of CSDH referral acceptance; OR = 0.286 [0.204 – 0.401].', 'Information');"><i class="fa fa-info-circle"></i></a> Age</label>
+                            <input class="brd-rd10 analysis-form-field form-control required" max="130" min="1" type="number" name="Age" id="Age">
+                        </div>
+                        <div class="col-md-6">
+                            <label><a href="javascript:helpMessage('The presence of headaches at the point of referral has been shown to be a positive predictor of CSDH referral acceptance; OR = 4.189 [3.070 – 5.717].', 'Information');"><i class="fa fa-info-circle"></i></a> Does the patient have headache?</label>
+                            <select name="Headache" id="Headache" class="form-control required">
+                                <option value="">Select</option>
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                            </select>
+                        </div>
+                        
+                        <div class="clearfix">&nbsp;</div>
+                        
+                        <div class="col-md-6">
+                            <label><a href="javascript:helpMessage('The presence of dementia has been shown to be a negative predictor of CSDH referral acceptance; OR = 0.244 [0.154 – 0.387].', 'Information');"><i class="fa fa-info-circle"></i></a> Does the patient have dementia?</label>
+                            <select name="Dementia" id="Dementia" class="form-control required">
+                                <option value="">Select</option>
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label><a href="javascript:helpMessage('The presence of motor deficit or weakness on physical examination is a positive predictor of CSDH referral acceptance; OR = 5.904 [4.226 – 8.249].', 'Information');"><i class="fa fa-info-circle"></i></a> Does the patient have motor weakness?</label>
+                            <select name="Motor_Weakness" id="Motor_Weakness" class="form-control required">
+                                <option value="">Select</option>
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                            </select>
+                        </div>
+
+                        <div class="clearfix">&nbsp;</div>
+
+                        <div class="col-md-6">
+                            <label><a href="javascript:helpMessage('The presence of radiological midline shift on referral MRI scans reported by neuro-radiologists is a positive predictor of CSDH referral acceptance; OR = 29.708 [20.567 – 42.911].', 'Information');"><i class="fa fa-info-circle"></i></a> Is there midline shift on the scan?</label>
+                            <select name="Midline_Shift" id="Midline_Shift" class="form-control required">
+                                <option value="">Select</option>
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label><a href="javascript:helpMessage('The size of the chronic subdural hematoma has been divided into 3 categories; small, medium, and large. A small hematoma is defined as a hematoma < 1 cm, a medium hematoma as 1 – 2 cm and a large hematoma as > 2 cm. The presence of only a large hematoma is a positive predictor of CSDH referral acceptance; OR = 132.544 (82.575 – 212.752).', 'Information');"><i class="fa fa-info-circle"></i></a> What is the size of CSDH?</label>
+                            <select name="CSDH_size" id="CSDH_size" class="form-control required">
+                                <option value="">Select</option>
+                                <option value="1">Small</option>
+                                <option value="2">Medium</option>
+                                <option value="3">Large</option> 
+                            </select>
+                        </div>
+
+                        <div class="clearfix">&nbsp;</div>
+
+                        <div class="col-md-6">
+                            <label><a href="javascript:helpMessage('A patients pre-morbid quality of life (QoL) was binarized as being either “reasonable” or “poor”. Poor pre-morbid QoL was defined as any individual requiring full time care or ASA grade 4. Everyone else is considered to have a reasonable quality of life. The presence of a poor pre-morbid QoL was a negative predictor of CSDH referral acceptance; OR = 0.083 (0.033 – 0.206).', 'Information');"><i class="fa fa-info-circle"></i></a> What was the patient's premorbid quality of life?</label>
+                            <select name="QoL" id="QoL" class="form-control required">
+                                <option value="">Select</option>
+                                <option value="1">Poor</option>
+                                <option value="0">Reasonable</option>                                        
+                            </select>
+                        </div>                        
+                        
+                        <div class="clearfix">&nbsp;</div>
+                        <div class="col-md-12 text-center">
+                            <button style="color:#fff" class="thm-btn scndry-bg brd-rd10 position-relative overflow-hidden submit-button" type="submit" name="Predict" id="Predict">PREDICT</button>
+                        </div>
+                    </div>
+                </form>
+                {% else %}
+                    <div class="result-container">
+                        <table class="rc-datainput-table">
+                            <tr>
+                                <th colspan="2">Input Values Recap</th>
+                            </tr>
+                            <tr>
+                                <td>Age</td>
+                                <td>{{ request.POST.Age }}</td>
+                            </tr>
+                            <tr>
+                                <td>Headache</td>
+                                <td>
+                                    {% if request.POST.Headache == '1' %}
+                                        Yes
+                                    {% else %}
+                                        No
+                                    {% endif %}
+                                
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Dementia</td>
+                                <td>
+                                    {% if request.POST.Dementia == '1' %}
+                                        Yes
+                                    {% else %}
+                                        No
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Motor Weakness</td>
+                                <td>
+                                    {% if request.POST.Motor_Weakness == '1' %}
+                                        Yes
+                                    {% else %}
+                                        No
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Midline Shift</td>
+                                <td>
+                                    {% if request.POST.Midline_Shift == '1' %}
+                                        Yes
+                                    {% else %}
+                                        No
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>CSDH size</td>
+                                <td>
+                                    {% if request.POST.CSDH_size == '1' %}
+                                        Small
+                                    {% elif request.POST.CSDH_size == '2' %}
+                                        Medium
+                                    {% elif request.POST.CSDH_size == '3' %}
+                                        Large
+                                    {% else %}
+                                        Not Selected
+                                    {% endif %}
+                                
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Quality of Life (QoL)</td>
+                                <td>
+                                    {% if request.POST.QoL == '1' %}
+                                        Poor
+                                    {% elif request.POST.QoL == '0' %}
+                                        Reasonable
+                                    {% else %}
+                                        Not Selected
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            
+                        </table>
+
+                        <table class="rc-result-table">
+                            <tr>
+                                <th colspan="2">Prediction Results</th>
+                            </tr>
+                            <tr>
+                                <td>Probability</td>
+                                <td>{{ probability }}</td>
+                            </tr>
+                            <tr>
+                                <td>Prediction Status</td>
+                                <td>{{ prediction }}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">Lime Results</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><img src="{% static 'output.png' %}" style="width:100%;" /></td>
+                            </tr>
+                        </table>
+
+                        <div style="text-align:center; margin-top: 50px;">
+                            <a href="/neural-analysis-model/?" style="color:#fff" class="thm-btn scndry-bg brd-rd10 position-relative overflow-hidden submit-button">Make New Prediction</a>
+                        </div>
+
+                    </div>
+
+                {% endif %}
+
+
+            </div>
+        </div>
+        {% if output %}
+        {{output}} <!-- This lime_ouput will be directly rendered from the view.py...-->
+        {% endif %}
+    </section>
+
+{% include "footer.html" %} 
